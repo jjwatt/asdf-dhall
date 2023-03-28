@@ -6,4 +6,4 @@ set -eu -o pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../lib/utils.sh"
 
 get_download_urls "$ASDF_INSTALL_VERSION" "$os_arch" \
-| xargs -P1 -I{} sh -c "curl -sSfL {} | tar -jx -C $ASDF_DOWNLOAD_PATH"
+| xargs -P1 -I{} sh -c "curl -sSfL {} | tar -jx -C $ASDF_DOWNLOAD_PATH --strip-components=1"
