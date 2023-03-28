@@ -7,4 +7,3 @@ get_download_urls() {
 }
 
 [ "$(uname)" = Darwin ] && os_arch=macos || os_arch=Linux
-[ -z "$ASDF_CONCURRENCY" ] && concurrency=1 || concurrency="$ASDF_CONCURRENCY"

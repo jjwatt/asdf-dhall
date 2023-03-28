@@ -9,7 +9,7 @@ if [ -z "$ASDF_DOWNLOAD_PATH" ]
 then
   # Old asdf version, must download first
   get_download_urls "$ASDF_INSTALL_VERSION" "$os_arch" \
-  | xargs -P"$concurrency" -I{} sh -c "curl -sSfL {} | tar -jx -C $ASDF_INSTALL_PATH"
+  | xargs -P1 -I{} sh -c "curl -sSfL {} | tar -jx -C $ASDF_INSTALL_PATH"
 else
   # New asdf version, download is already done
   cp -R "$ASDF_DOWNLOAD_PATH/" "$ASDF_INSTALL_PATH"
