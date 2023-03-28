@@ -18,7 +18,7 @@ get_download_urls() {
 }
 
 # also used in bin/install for backwards compat. update both places
-[ "$(uname)" = Darwin ] && os_arch=macos || os_arch=linux
+[ "$(uname)" = Darwin ] && os_arch=macos || os_arch=Linux
 [ -z "$ASDF_CONCURRENCY" ] && concurrency=1 || concurrency="$ASDF_CONCURRENCY"
 
 get_download_urls "$ASDF_INSTALL_VERSION" "$os_arch" \
