@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
-set -eu -o pipefail
+set -euo pipefail
 
 # shellcheck source=../lib/utils.sh
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../lib/utils.sh"
 
-get_download_urls "$ASDF_INSTALL_VERSION" "$os_arch" \
-| xargs -P1 -I{} sh -c "curl -sSfL {} | tar -jx -C $ASDF_DOWNLOAD_PATH --strip-components=1"
+# get_download_urls "$ASDF_INSTALL_VERSION" "$os_arch" \
+# | xargs -P1 -I{} sh -c "curl -sSfL {} | tar -jx -C $ASDF_DOWNLOAD_PATH --strip-components=1"
+
+os_arch="$(get_os_arch)"
+mkdir -p "$ASDF_DOWNLOAD_PATH"
+download_release "$ASDF_INSTALL_VERSION" "$os_arch"
+
+
