@@ -1,5 +1,5 @@
 
-# set -eu pipefail
+set -euo pipefail
 
 TOOL_NAME="dhall"
 # TOOL_TEST="dhall --help"
@@ -42,17 +42,18 @@ download_release() {
   local version os_arch download_path
   version="$1"
   os_arch="$2"
-  download_path="$3"
+  download_path="${3-}"
+  # download_path is optional
 
   if [ -z "$download_path" ]; then
-    if [ -z "$ASDF_DOWNLOAD_PATH" ]; then
-      ASDF_DOWNLOAD_PATH="$(mktemp -d "${TMPDIR:-/tmp}"/asdfdhall.XXX)"
+    if [ -z "${ASDF_DOWNLOAD_PATH-}" ]; then
+      ASDF_DOWNLOAD_PATH="$(mktemp -d "${TMPDIR:-/tmp}"/asdf-dhall.XXX)"
     fi  
     download_path="$ASDF_DOWNLOAD_PATH"
     echo "in if condition: download_path: $download_path"
   fi
   printf "* Downloading %s release %s from %s\n" \
-    "$TOOL_VERSION" \
+    "${TOOL_VERSION-}" \
     "$version" \
     "$url"
 
